@@ -19,7 +19,9 @@ jobs:
       - uses: actions/checkout@v4
       - id: set-matrix
         run: |
-          echo "matrix={\"node\":[$(python getter.py)]}" >> $GITHUB_OUTPUT
+          set -e
+          NODES=$(python getter.py)
+          echo "matrix={\"node\":[${NODES}]}" >> "$GITHUB_OUTPUT"
       - name: "Set Up Julia"
         uses: julia-actions/setup-julia@v2
         with:
